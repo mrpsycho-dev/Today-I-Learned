@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Coiny&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* font-size: 10px; */
+  font-weight: 400;
+  font-family: "coiny", sans-serif;
+  background-color: #292524;
+  color: #fff;
+}
+img {
+  width: 4.5rem;
+}
+h1 {
+  text-transform: uppercase;
+  font-size: 3rem;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  /* margin-top: 3rem; */
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 3rem 0;
+}
+
+/*  */
+.btn {
+  font-family: "coiny", sans-serif;
+  display: inline-block;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  /* background-color: khaki; */
+  color: #fff;
+  font-size: 1rem;
+  text-transform: uppercase;
+  background-image: linear-gradient(135deg, #3b82f6, #ef4444, #16a34a, #eab308);
+}
+.btn:hover {
+  transform: scale(1.1);
+  /* transform: rotate(-5deg); */
+}
+.btn-large {
+  /* padding: ; */
+}
+.btn-all-categories {
+  /* align-self: stretch; */
+  margin-bottom: 2rem;
+}
+.btn-category {
+  /* align-self: stretch; */
+  width: auto;
+  background-color: #3b82f6;
+  background-image: none;
+  margin-bottom: 1rem;
+}
+
+/*  */
+ul {
+  /* text-decoration: none; */
+  list-style: none;
+}
+.main {
+  display: grid;
+  grid-template-columns: 250px, 1fr;
+  gap: 48px;
+  justify-items: stretch;
+  align-items: start;
+  justify-content: space-evenly;
+  align-content: center;
+}
+aside {
+  grid-column: 1/1;
+}
+main section {
+  grid-column: 2/-1;
+}
+aside ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* aside li {
+  align-self: stretch;
+  flex-grow: 1;
+  width: 100%;
+} */
+.category {
+}
+
+/*  */
+.fact-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #44403c;
+  border-radius: 20px;
+  padding: 1rem 2rem;
+  margin-bottom: 3rem;
+}
+input {
+  background-color: #78716c;
+  /* color: #fff; */
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  border: none;
+  width: fit-content;
+}
+input::placeholder {
+  color: #9d9791;
+  font-size: large;
+}
+
+select {
+  background-color: #78716c;
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  border: none;
+  color: #fff;
+}
+
+/*  */
+.fact {
+}
+.source {
+}
+.tag {
+}
+.vote-buttons {
+}
