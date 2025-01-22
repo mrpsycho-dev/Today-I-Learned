@@ -206,3 +206,7 @@ section ul {
 .vote-buttons button:hover {
   background-color: #78716c;
 }
+
+.hidden {
+  display: none;
+}
