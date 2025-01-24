@@ -55,13 +55,13 @@ h1 {
   /* background-color: khaki; */
   color: #fafaf9;
   background-image: linear-gradient(135deg, #3b82f6, #ef4444, #16a34a, #eab308);
-  transition: 0.3s;
+  transition: 0.5s;
 }
 .btn:hover {
-  transform: scale(1.1);
+  transform: rotate(-5deg) scale(1.1);
 }
 .btn:active {
-  transform: scale(0.9);
+  transform: rotate(-5deg) scale(0.9);
 }
 .btn-large {
   padding: 1rem 2rem;
