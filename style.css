@@ -181,10 +181,13 @@ section ul {
   color: #3b82f6;
 }
 .tag {
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 700;
   border-radius: 100px;
   background-color: #000;
-  padding: 10px 20px;
-  font-size: 14px;
+  padding: 5px 10px;
+  /* font-size: 14px; */
   text-transform: uppercase;
   text-decoration: none;
 }

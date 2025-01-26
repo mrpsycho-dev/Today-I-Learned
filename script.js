@@ -83,15 +83,16 @@ shareAFact.addEventListener("click", function () {
 
 function createFactsList(dataArr) {
   const htmlArr = dataArr.map(
-    (fact) => `<li class = "fact"><p>${fact.text}</p>
+    (fact) => `<li class = "fact"><p>${fact.text}
     <a class="source" href="${fact.source}">(Source)</a>
+    </p>
     <span class="tag" style="background-color: ${
       CATEGORIES.find((cat) => cat.name === `${fact.category}`).color
     }">${fact.category}</span>
     
-    </li> `
+    </li>`
   );
-  const html = htmlArr.join();
+  const html = htmlArr.join("");
   // console.log(htmlArr);
   factList.insertAdjacentHTML("afterbegin", html);
 }
