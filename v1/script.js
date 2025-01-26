@@ -16,24 +16,24 @@ const shareAFact = document.querySelector(".share");
 const factList = document.querySelector(".fact-list");
 
 factList.innerHTML = "";
-loadFacts();
+// loadFacts();
 // createFactsList(initialFacts);
 
-async function loadFacts() {
-  const res = await fetch(
-    "https://fshnehqkbmfnicqighsu.supabase.co/rest/v1/facts",
-    {
-      headers: {
-        apikey:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzaG5laHFrYm1mbmljcWlnaHN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc4MzQxMDIsImV4cCI6MjA1MzQxMDEwMn0.-ib2qr7lFdzzedjBBose9Bu2uS0MJ3TfcNp9cUecFCM",
-        authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzaG5laHFrYm1mbmljcWlnaHN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc4MzQxMDIsImV4cCI6MjA1MzQxMDEwMn0.-ib2qr7lFdzzedjBBose9Bu2uS0MJ3TfcNp9cUecFCM",
-      },
-    }
-  );
-  const data = await res.json();
-  createFactsList(data);
-}
+// async function loadFacts() {
+//   const res = await fetch(
+//     "https://fshnehqkbmfnicqighsu.supabase.co/rest/v1/facts",
+//     {
+//       headers: {
+//         apikey:
+//           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzaG5laHFrYm1mbmljcWlnaHN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc4MzQxMDIsImV4cCI6MjA1MzQxMDEwMn0.-ib2qr7lFdzzedjBBose9Bu2uS0MJ3TfcNp9cUecFCM",
+//         authorization:
+//           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzaG5laHFrYm1mbmljcWlnaHN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc4MzQxMDIsImV4cCI6MjA1MzQxMDEwMn0.-ib2qr7lFdzzedjBBose9Bu2uS0MJ3TfcNp9cUecFCM",
+//       },
+//     }
+//   );
+//   const data = await res.json();
+//   createFactsList(data);
+// }
 
 shareAFact.addEventListener("click", function () {
   if (factForm.classList.contains("hidden")) {
