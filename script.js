@@ -11,6 +11,10 @@ const CATEGORIES = [
   { name: "news", color: "#8b5cf6" },
 ];
 
+const factForm = document.querySelector(".fact-form");
+const shareAFact = document.querySelector(".share");
+const factList = document.querySelector(".fact-list");
+
 factList.innerHTML = "";
 loadFacts();
 // createFactsList(initialFacts);
