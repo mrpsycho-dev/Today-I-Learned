@@ -189,6 +189,7 @@ function FactList({ facts }) {
           <Fact key={fact.id} fact={fact} />
         ))}
       </ul>
+      <FactsCounter />
     </section>
   );
 }
@@ -218,6 +219,13 @@ function Fact({ fact }) {
         <button>⛔️ {fact.votesFalse}</button>
       </div>
     </li>
+  );
+}
+function FactsCounter() {
+  return (
+    <p>
+      There are {initialFacts.length} facts in the database. Add your own...
+    </p>
   );
 }
 
