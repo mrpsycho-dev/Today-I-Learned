@@ -25,7 +25,8 @@ h1 {
   line-height: 0.9;
 }
 
-.container {
+#root {
+  /* max-width: 1500px; */
   width: 90%;
   margin: 0 auto;
   /* margin-top: 3rem; */
@@ -59,10 +60,10 @@ h1 {
   transition: 0.5s;
 }
 .btn:hover {
-  transform: rotate(-5deg) scale(1.1);
+  transform: rotate(-2deg) scale(1.1);
 }
 .btn:active {
-  transform: rotate(-5deg) scale(0.9);
+  transform: scale(0.9);
 }
 .btn-large {
   padding: 1rem 2rem;
@@ -169,6 +170,7 @@ section ul {
   padding: 10px 20px;
   margin-bottom: 20px;
   border-radius: 10px;
+  /* background-color: #fff; */
 }
 .source {
   /* margin: 10px; */
