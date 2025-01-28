@@ -61,19 +61,7 @@ function App() {
 
   return (
     <>
-      <header className="header">
-        <div className="logo">
-          <img src="logo.png" alt="Today I Learned logo" />
-          <h1>Today I Learned</h1>
-        </div>
-        <button
-          className="btn btn-large share"
-          onClick={() => setShowForm((show) => !show)}
-        >
-          Share a fact
-        </button>
-      </header>
-
+      <Header huhu={setShowForm} />
       {showForm ? <NewFactForm /> : null}
       <main className="main">
         <CategoryFilter />
@@ -81,6 +69,23 @@ function App() {
       </main>
       {/* <Counter /> */}
     </>
+  );
+}
+
+function Header({ huhu }) {
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src="logo.png" alt="Today I Learned logo" />
+        <h1>Today I Learned</h1>
+      </div>
+      <button
+        className="btn btn-large share"
+        onClick={() => huhu((show) => !show)}
+      >
+        Share a fact
+      </button>
+    </header>
   );
 }
 
