@@ -58,14 +58,17 @@ const initialFacts = [
 
 function App() {
   const [showForm, setShowForm] = useState(false);
+  const [facts, setFacts] = useState(initialFacts);
 
   return (
     <>
       <Header showForm={showForm} huhu={setShowForm} />
-      {showForm ? <NewFactForm /> : null}
+      {showForm ? (
+        <NewFactForm setFacts={setFacts} setShowForm={setShowForm} />
+      ) : null}
       <main className="main">
         <CategoryFilter />
-        <FactList />
+        <FactList facts={facts} />
       </main>
       {/* <Counter /> */}
     </>
@@ -89,20 +92,21 @@ function Header({ showForm, huhu }) {
   );
 }
 
-function IsValidURL() {}
+// function IsValidURL() {}
 
-function NewFactForm() {
+function NewFactForm({ setFacts, setShowForm }) {
   const [text, setText] = useState("");
-  const [source, setSource] = useState("");
+  const [source, setSource] = useState("https://example.com");
   const [category, setCategory] = useState("");
 
   function handleSubmit(e) {
     // 1. PREVENT BROWSER RELOAD
     e.preventDefault();
-    console.log(text, source, category);
+    // console.log(text, source, category);
 
     // 2. CHECK IF DATA IS VALID
-    if (text && IsValidURL(source) && category && text.length <= 200) {
+    if (text && source && category && text.length <= 200) {
+      console.log("valid fact");
       // 3. CREATE NEW FACT OBJECT
       const newFact = {
         id: Math.round(Math.random() * 1000000000),
@@ -112,12 +116,18 @@ function NewFactForm() {
         votesInteresting: 0,
         votesMindblowing: 0,
         votesFalse: 0,
-        createdIn: new Date().getCurrentYear(),
+        createdIn: new Date().getFullYear(),
       };
 
       // 4. ADD FACT TO THE UI
+      // setFacts(initialFacts.unshift(newFact));
+      setFacts([newFact, ...initialFacts]);
       // 5. RESET INPUT FIELDS
+      setText("");
+      setSource("");
+      setCategory("");
       // 6. CLOSE THE FORM
+      setShowForm(false);
     }
   }
 
@@ -171,12 +181,11 @@ function CategoryFilter() {
   );
 }
 
-function FactList() {
-  const Facts = initialFacts;
+function FactList({ facts }) {
   return (
     <section>
       <ul className="fact-list">
-        {Facts.map((fact) => (
+        {facts.map((fact) => (
           <Fact key={fact.id} fact={fact} />
         ))}
       </ul>
