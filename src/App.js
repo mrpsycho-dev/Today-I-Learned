@@ -89,14 +89,42 @@ function Header({ showForm, huhu }) {
   );
 }
 
+function IsValidURL() {}
+
 function NewFactForm() {
   const [text, setText] = useState("");
   const [source, setSource] = useState("");
   const [category, setCategory] = useState("");
+
+  function handleSubmit(e) {
+    // 1. PREVENT BROWSER RELOAD
+    e.preventDefault();
+    console.log(text, source, category);
+
+    // 2. CHECK IF DATA IS VALID
+    if (text && IsValidURL(source) && category && text.length <= 200) {
+      // 3. CREATE NEW FACT OBJECT
+      const newFact = {
+        id: Math.round(Math.random() * 1000000000),
+        text,
+        source,
+        category,
+        votesInteresting: 0,
+        votesMindblowing: 0,
+        votesFalse: 0,
+        createdIn: new Date().getCurrentYear(),
+      };
+
+      // 4. ADD FACT TO THE UI
+      // 5. RESET INPUT FIELDS
+      // 6. CLOSE THE FORM
+    }
+  }
+
   return (
-    <form className="fact-form">
+    <form className="fact-form" onSubmit={handleSubmit}>
       <input
-        class="maxxx"
+        className="maxxx"
         type="text"
         placeholder="Share a fact with the world..."
         value={text}
@@ -117,7 +145,7 @@ function NewFactForm() {
           </option>
         ))}
       </select>
-      <button class="btn btn-large">Post</button>
+      <button className="btn btn-large">Post</button>
     </form>
   );
 }
