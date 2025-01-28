@@ -61,7 +61,7 @@ function App() {
 
   return (
     <>
-      <Header huhu={setShowForm} />
+      <Header showForm={showForm} huhu={setShowForm} />
       {showForm ? <NewFactForm /> : null}
       <main className="main">
         <CategoryFilter />
@@ -72,7 +72,7 @@ function App() {
   );
 }
 
-function Header({ huhu }) {
+function Header({ showForm, huhu }) {
   return (
     <header className="header">
       <div className="logo">
@@ -83,14 +83,43 @@ function Header({ huhu }) {
         className="btn btn-large share"
         onClick={() => huhu((show) => !show)}
       >
-        Share a fact
+        {showForm ? "Close" : "Share a Fact"}
       </button>
     </header>
   );
 }
 
 function NewFactForm() {
-  return <form className="fact-form">Fact Form</form>;
+  const [text, setText] = useState("");
+  const [source, setSource] = useState("");
+  const [category, setCategory] = useState("");
+  return (
+    <form className="fact-form">
+      <input
+        class="maxxx"
+        type="text"
+        placeholder="Share a fact with the world..."
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <span>200</span>
+      <input
+        type="text"
+        placeholder="Trustworthy source"
+        value={source}
+        onChange={(e) => setSource(e.target.value)}
+      />
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option value="">Choose category:</option>
+        {CATEGORIES.map((cat) => (
+          <option key={cat.name} value={cat.name}>
+            {cat.name.toUpperCase()}
+          </option>
+        ))}
+      </select>
+      <button class="btn btn-large">Post</button>
+    </form>
+  );
 }
 function CategoryFilter() {
   return (
