@@ -102,7 +102,7 @@ function NewFactForm() {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <span>200</span>
+      <span>{200 - text.length}</span>
       <input
         type="text"
         placeholder="Trustworthy source"
