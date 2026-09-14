@@ -1,41 +1,7 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import supabase from "./supabase";
-
 import "./style.css";
-
-const initialFacts = [
-  {
-    id: 1,
-    text: "React is being developed by Meta (formerly facebook)",
-    source: "https://opensource.fb.com/",
-    category: "technology",
-    votesInteresting: 24,
-    votesMindblowing: 9,
-    votesFalse: 4,
-    createdIn: 2021,
-  },
-  {
-    id: 2,
-    text: "Millennial dads spend 3 times as much time with their kids than their fathers spent with them. In 1982, 43% of fathers had never changed a diaper. Today, that number is down to 3%",
-    source:
-      "https://www.mother.ly/parenting/millennial-dads-spend-more-time-with-their-kids",
-    category: "society",
-    votesInteresting: 11,
-    votesMindblowing: 2,
-    votesFalse: 0,
-    createdIn: 2019,
-  },
-  {
-    id: 3,
-    text: "Lisbon is the capital of Portugal",
-    source: "https://en.wikipedia.org/wiki/Lisbon",
-    category: "society",
-    votesInteresting: 8,
-    votesMindblowing: 3,
-    votesFalse: 1,
-    createdIn: 2015,
-  },
-];
 
 function App() {
   const [showForm, setShowForm] = useState(false);
@@ -57,8 +23,12 @@ function App() {
           .order("votesInteresting", { ascending: false })
           .limit(1000);
 
-        if (!error) setFacts(facts);
-        else alert("There was a problem retrieving the facts!");
+        if (!error) {
+          setFacts(facts);
+        } else {
+          console.error("Supabase Error Details:", error);
+          alert("There was a problem retrieving the facts!");
+        }
         setIsLoading(false);
       }
       getFacts();
@@ -139,25 +109,47 @@ function NewFactForm({ setFacts, setShowForm }) {
   const textLength = text.length;
 
   async function handleSubmit(e) {
-    // 1. Prevent browser reload
     e.preventDefault();
-    console.log(text, source, category);
-    // 2. Check if data is valid. If so, create a new fact
-    if (text && isValidHttpUrl(source) && category && textLength <= 200) {
-      // 3. Upload the fact to Supabase and receive the new fact object
-      setIsUploading(true);
-      const { data, newFact, error } = await supabase
-        .from("facts")
-        .insert([{ text, source, category }])
-        .select();
-      setIsUploading(false);
-      // 4. Add the new fact to the UI: add the fact to state
-      if (!error) setFacts((facts) => [newFact[0], ...facts]);
-      // 5. Reset input fields
+
+    // Auto-prefix https:// if omitted
+    let formattedSource = source.trim();
+    if (
+      formattedSource &&
+      !formattedSource.startsWith("http://") &&
+      !formattedSource.startsWith("https://")
+    ) {
+      formattedSource = `https://${formattedSource}`;
+    }
+
+    // Validation checks with user alerts
+    if (!text) return alert("Please enter a fact.");
+    if (textLength > 200) return alert("Fact must be 200 characters or less.");
+    if (!category) return alert("Please select a category.");
+    if (!isValidHttpUrl(formattedSource))
+      return alert(
+        "Please enter a valid URL source (e.g., https://example.com).",
+      );
+
+    setIsUploading(true);
+
+    const { data: newFact, error } = await supabase
+      .from("facts")
+      .insert([{ text, source: formattedSource, category }])
+      .select();
+
+    setIsUploading(false);
+
+    if (error) {
+      console.error("Insert error:", error);
+      alert(`Upload failed: ${error.message}`);
+      return;
+    }
+
+    if (newFact && newFact.length > 0) {
+      setFacts((facts) => [newFact[0], ...facts]);
       setText("");
       setSource("");
       setCategory("");
-      // 6. Close the form
       setShowForm(false);
     }
   }
@@ -271,7 +263,7 @@ function Fact({ fact, setFacts }) {
           className="source"
           href={fact.source}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           (Source)
         </a>
@@ -279,8 +271,11 @@ function Fact({ fact, setFacts }) {
       <span
         className="tag"
         style={{
-          backgroundColor: CATEGORIES.find((cat) => cat.name === fact.category)
-            .color,
+          // backgroundColor: CATEGORIES.find((cat) => cat.name === fact.category)
+          //   .color,
+          backgroundColor:
+            CATEGORIES.find((cat) => cat.name === fact.category)?.color ||
+            "#3b82f6",
         }}
       >
         {fact.category}
@@ -291,6 +286,12 @@ function Fact({ fact, setFacts }) {
           disabled={isUpdating}
         >
           👍 {fact.votesInteresting}
+        </button>
+        <button
+          onClick={() => handleVote("votesMindblowing")}
+          disabled={isUpdating}
+        >
+          🤯 {fact.votesMindblowing}
         </button>
         <button onClick={() => handleVote("votesFalse")} disabled={isUpdating}>
           ⛔️ {fact.votesFalse}
