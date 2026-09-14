@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# Today I Learned
+A responsive, full-stack web application for sharing and discovering interesting facts across a variety of topics. Built with React and Supabase, the application provides persistent cloud storage, category-based discovery, and community-driven voting.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🔗 **Live Demo:** https://today-we-learned.netlify.app/
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+* **Submit Facts** — Share facts of up to 200 characters with automatic source URL validation.
+* **Category Filtering** — Instantly filter facts across 8 categories:
 
-### `npm start`
+  * Technology
+  * Science
+  * Finance
+  * Society
+  * Entertainment
+  * Health
+  * History
+  * News
+* **Community Voting** — React to facts with:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  * 👍 Interesting
+  * 🤯 Mindblowing
+  * ⛔ False
+* **Dispute Detection** — Automatically marks facts as **[⛔ DISPUTED]** when false votes exceed positive votes.
+* **Responsive Design** — Optimized for a smooth experience across desktop, tablet, and mobile devices.
+* **Persistent Data** — Facts and community votes are stored in a PostgreSQL database through Supabase.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+| Category          | Technology                                |
+| ----------------- | ----------------------------------------- |
+| **Frontend**      | React, React Hooks, Functional Components |
+| **Styling**       | CSS                                       |
+| **Backend / API** | Supabase                                  |
+| **Database**      | PostgreSQL                                |
+| **Deployment**    | Netlify                                   |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+Follow these steps to run the project locally.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone the repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/mrpsycho-dev/today-i-learned.git
+cd today-i-learned
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. Install dependencies
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 3. Configure Supabase
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create a Supabase project and add your project credentials to the application's Supabase configuration.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+For example:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+const supabaseUrl = "https://your-project.supabase.co";
+const supabaseKey = "your-anon-key";
 
-## Learn More
+export const supabase = createClient(
+  supabaseUrl,
+  supabaseKey
+);
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> **Security:** Never expose your Supabase service-role key or other private credentials in the frontend. Only use the public/anon key intended for client-side applications.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4. Start the development server
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The application will be available at:
 
-### Analyzing the Bundle Size
+```text
+http://localhost:3000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Project Structure
 
-### Making a Progressive Web App
+```text
+today-i-learned/
+├── public/
+├── src/
+│   ├── components/
+│   ├── supabase.js
+│   ├── App.js
+│   └── index.js
+├── package.json
+└── README.md
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Deployment
 
-### Advanced Configuration
+The application is deployed on **Netlify**. Every update pushed to the configured GitHub repository can be automatically built and deployed through Netlify's CI/CD pipeline.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## License
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is open source and available for learning, experimentation, and further development.
